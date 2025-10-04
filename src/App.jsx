@@ -3,6 +3,14 @@ import {motion, AnimatePresence} from "framer-motion";
 import Header from "./Header.jsx";
 import {MoveDown, ChevronLeft, ChevronRight} from "lucide-react";
 
+import CDM_mobile from "./assets/CDM_Mobile.png"
+import CDM_desktop from "./assets/CDM_Browser.png"
+import SEAA_mobile from "./assets/SEAA_Mobile.png"
+import SEAA_desktop from "./assets/SEAA_Browser.png"
+import ISLA_mobile from "./assets/ISLA_Mobile.png"
+import ISLA_desktop from "./assets/ISLA_Browser.png"
+import Dice_Desktop from  "./assets/Dice_Desktop.png"
+
 function App() {
 
     const jobList = ["Gian", "Carlo"]
@@ -13,57 +21,28 @@ function App() {
             id: 0,
             title: "Colegio De Muntinlupa Website",
             description: "A modern, responsive website for educational institution featuring student portal, faculty management, and online enrollment system.",
-            desktop_image: "https://picsum.photos/seed/1/1280/720",
-            phone_image: "https://picsum.photos/seed/1/720/1280",
+            desktop_image: CDM_desktop,
+            phone_image: CDM_mobile,
         },
         {
             id: 1,
-            title: "E-Commerce Mobile App",
-            description: "Full-featured shopping app with cart management, payment integration, and real-time order tracking.",
-            desktop_image: "https://picsum.photos/seed/2/1280/720",
-            phone_image: "https://picsum.photos/seed/2/720/1280",
+            title: "Association Website",
+            description: "Full-featured Membership management for an EMT Association.",
+            desktop_image: SEAA_desktop,
+            phone_image: SEAA_mobile,
         },
         {
             id: 2,
-            title: "Portfolio Dashboard",
-            description: "Analytics dashboard for tracking website metrics, user engagement, and performance statistics.",
-            desktop_image: "https://picsum.photos/seed/3/1280/720",
-            phone_image: "https://picsum.photos/seed/3/720/1280",
+            title: "Integrated Solution Website",
+            description: "All in one management web app for an entire school.",
+            desktop_image: ISLA_desktop,
+            phone_image: ISLA_mobile,
         },
         {
             id: 3,
-            title: "Fitness Tracker App",
-            description: "Mobile application for workout planning, calorie tracking, and progress monitoring.",
-            desktop_image: "https://picsum.photos/seed/4/1280/720",
-            phone_image: "https://picsum.photos/seed/4/720/1280",
-        },
-        {
-            id: 4,
-            title: "Restaurant Booking System",
-            description: "Web platform for restaurant reservations with table management and menu ordering features.",
-            desktop_image: "https://picsum.photos/seed/5/1280/720",
-            phone_image: "https://picsum.photos/seed/5/720/1280",
-        },
-        {
-            id: 5,
-            title: "Social Media App",
-            description: "Social networking mobile app with posts, stories, messaging, and live streaming capabilities.",
-            desktop_image: "https://picsum.photos/seed/6/1280/720",
-            phone_image: "https://picsum.photos/seed/6/720/1280",
-        },
-        {
-            id: 6,
-            title: "Project Management Tool",
-            description: "Collaborative workspace for teams with task tracking, time logging, and project analytics.",
-            desktop_image: "https://picsum.photos/seed/7/1280/720",
-            phone_image: "https://picsum.photos/seed/7/720/1280",
-        },
-        {
-            id: 7,
-            title: "Music Streaming App",
-            description: "Mobile music player with playlist creation, offline mode, and personalized recommendations.",
-            desktop_image: "https://picsum.photos/seed/8/1280/720",
-            phone_image: "https://picsum.photos/seed/8/720/1280",
+            title: "Dice Game - Roblox",
+            description: "An incremental game on Roblox",
+            desktop_image: Dice_Desktop,
         }
     ];
 
@@ -113,7 +92,7 @@ function App() {
                         whileHover={{scale: 1.01}}
                         className="text-4xl font-bold text-base-content"
                     >
-                        Hey! I'm <span className="text-primary">Gian Carlo</span>, and these are my work!
+                        Hey! I'm <span className="text-primary">Gian Carlo</span>, and I'm proud of these projects!
                     </motion.p>
                 </div>
 
@@ -195,7 +174,7 @@ function App() {
                                 </div>
 
                                 {/* Mobile mockup */}
-                                <div className='aspect-[9/16] h-[30em]'>
+                                {(selectedItem.phone_image && <div className='aspect-[9/18] h-[30em]'>
                                     <div className="w-full bg-neutral-500 h-full p-1 rounded-xl flex flex-col">
                                         <div className="w-full bg-neutral-900 flex-1 rounded-xl overflow-hidden">
                                             <img
@@ -205,7 +184,7 @@ function App() {
                                             />
                                         </div>
                                     </div>
-                                </div>
+                                </div>)}
                             </div>
 
                             {/* Description below */}

@@ -1,7 +1,7 @@
 import {useEffect, useState, useRef} from "react";
 import {motion, AnimatePresence} from "framer-motion";
 import Header from "./Header.jsx";
-import {MoveDown, ChevronLeft, ChevronRight} from "lucide-react";
+import {MoveDown, ChevronLeft, ChevronRight, Send} from "lucide-react";
 
 import CDM_mobile from "./assets/CDM_Mobile.png"
 import CDM_desktop from "./assets/CDM_Browser.png"
@@ -14,7 +14,8 @@ import Dice_Desktop from  "./assets/Dice_Desktop.png"
 function App() {
 
     const jobList = ["Gian", "Carlo"]
-    const clientAttributeList = ["Talent", "Skill", "Passion"]
+    const clientAttributeList = ["Talent", "Skill", "Passion", "Vision", "Dreams", "Goals", "Ambition", "Courage", "Strength"]
+
 
     const portfolioItems = [
         {
@@ -54,7 +55,7 @@ function App() {
     useEffect(() => {
         const interval = setInterval(() => {
             setJobIndex((jobIndex + 1) % jobList.length)
-            setClientAttributeIndex((clientAttributeIndex + 1) % clientAttributeList.length)
+            setClientAttributeIndex((clientAttributeIndex + Math.round(Math.random() + 1)) % clientAttributeList.length)
         }, 3500)
 
         return () => clearInterval(interval)
@@ -66,16 +67,26 @@ function App() {
     return (
         <div className="h-fit w-full overflow-x-hidden bg-base-100 relative">
             {Header()}
+            <div className="h-dvh w-full fixed z-10 inset-0 pointer-events-none flex justify-end items-end p-4 md:p-8 lg:p-12">
+                <button
+                    className="pointer-events-auto bg-gradient-to-r from-blue-500 to-blue-700 text-white font-semibold py-2 px-4 md:py-3 md:px-6 rounded-full lg:rounded-xl shadow-xl transform transition-all duration-300 hover:scale-105 hover:shadow-2xl flex items-center gap-2 text-sm md:text-base"
+                    onClick={() => window.open("https://www.facebook.com/carlo.231887/", "_blank")}
+                >
+                    <Send className="w-4 h-4 md:w-5 md:h-5"/>
+                    <p> Contact Now </p>
+                </button>
+            </div>
             <div className="h-dvh w-full bg-base-200 flex relative items-center justify-center">
                 <AnimatePresence mode="wait">
                     <motion.div
                         key={jobIndex}
-                        className="text-7xl font-semibold text-base-content"
+                        className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-semibold text-base-content text-center px-4"
                         initial={{opacity: 0, y: -50}}
                         animate={{opacity: 1, y: 0, transition: {duration: 0.5}}}
                         exit={{opacity: 0, y: 50, transition: {duration: 0.7}}}
                     >
-                        The {" "} <span className="text-primary"> {jobList[jobIndex]} </span> for people with <span
+                        The {" "} <span className="text-primary"> {jobList[jobIndex]}
+                        </span>  for <br className="md:hidden"/> people with <span
                         className="text-primary"> {clientAttributeList[clientAttributeIndex]}</span>
                     </motion.div>
                 </AnimatePresence>
@@ -83,26 +94,26 @@ function App() {
             </div>
             <hr/>
             <div className="h-dvh w-full flex items-center flex-col justify-center bg-base-200 relative pt-20">
-                <div className="h-20 w-full p-12 flex items-center">
+                <div className="h-auto w-full p-4 md:p-8 lg:p-12 flex items-center">
                     <motion.p
                         initial={{opacity: 0, x: -20}}
                         whileInView={{opacity: 1, x: 0}}
                         transition={{duration: 0.8, ease: "easeOut"}}
-                        viewport={{once: true, amount: 1}}
+                        viewport={{once: true, amount: 0.5}}
                         whileHover={{scale: 1.01}}
-                        className="text-4xl font-bold text-base-content"
+                        className="text-2xl md:text-4xl font-bold text-base-content"
                     >
-                        Hey! I'm <span className="text-primary">Gian Carlo</span>, and I'm proud of these projects!
+                        Hey! I'm <span className="text-primary">Gian Carlo</span>, <br className="lg:hidden"/> and I'm proud of these PROJECTS!
                     </motion.p>
                 </div>
 
                 {/* Scroll container */}
-                <div className="h-2/3 w-[95%] relative">
+                <div className="h-1/3 md:h-2/3 w-[95%] relative">
                     <div
                         ref={scrollRef}
                         className="h-full w-full overflow-x-scroll overflow-y-hidden flex flex-row scroll-smooth no-scrollbar"
                     >
-                        <div className="absolute z-10 w-full h-full pointer-events-none">
+                        <div className="absolute z-10 w-full h-full pointer-events-none hidden md:block">
                             <button
                                 className="absolute -left-5 top-1/2 -translate-y-1/2 pointer-events-auto w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 hover:scale-110 transition-all duration-300 flex items-center justify-center"
                                 onClick={() => scrollRef.current.scrollLeft -= scrollRef.current.offsetWidth}
@@ -130,8 +141,8 @@ function App() {
                                 />
 
                                 {/* Title overlay */}
-                                <div className="w-full h-20 flex justify-start items-center z-10 p-6 absolute bottom-0 bg-gradient-to-r from-base-300 from-[60%] to-transparent to-[100%]">
-                                    <p className="text-3xl font-semibold text-white">{item.title}</p>
+                                <div className="w-full h-16 md:h-20 flex justify-start items-center z-[9] p-3 md:p-6 absolute bottom-0 bg-gradient-to-r from-base-300 from-[60%] to-transparent to-[100%]">
+                                    <p className="text-lg md:text-2xl lg:text-3xl font-semibold text-white line-clamp-2">{item.title}</p>
                                 </div>
                             </motion.div>
                         ))}
@@ -147,21 +158,21 @@ function App() {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         onClick={() => setSelectedItem(null)}
-                        className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-8 cursor-pointer"
+                        className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 md:p-8 cursor-pointer overflow-y-auto"
                     >
                         <motion.div
                             initial={{ opacity: 0, scale: 0.9 }}
                             animate={{ opacity: 1, scale: 1 }}
                             exit={{ opacity: 0, scale: 0.9 }}
                             onClick={(e) => e.stopPropagation()}
-                            className="bg-base-200 rounded-lg cursor-default flex flex-col gap-6 p-6"
+                            className="bg-base-200 rounded-lg cursor-default flex flex-col gap-4 md:gap-6 p-4 md:p-6 max-w-6xl w-full my-auto"
                         >
-                            <div className="flex flex-row gap-6 items-stretch">
+                            <div className="flex flex-col lg:flex-row gap-4 md:gap-6 items-stretch">
                                 {/* Desktop mockup */}
-                                <div className='aspect-video h-[30em]'>
+                                <div className='w-full lg:aspect-video lg:h-[30em]'>
                                     <div className="mockup-browser border-white border h-full bg-base-300 flex flex-col">
                                         <div className="mockup-browser-toolbar flex-shrink-0">
-                                            <div className="input">{selectedItem.title}</div>
+                                            <div className="input text-xs md:text-sm">{selectedItem.title}</div>
                                         </div>
                                         <div className="flex-1 w-full overflow-hidden">
                                             <img
@@ -174,7 +185,7 @@ function App() {
                                 </div>
 
                                 {/* Mobile mockup */}
-                                {(selectedItem.phone_image && <div className='aspect-[9/18] h-[30em]'>
+                                {(selectedItem.phone_image && <div className='w-1/2 mx-auto lg:w-auto lg:aspect-[9/18] lg:h-[30em]'>
                                     <div className="w-full bg-neutral-500 h-full p-1 rounded-xl flex flex-col">
                                         <div className="w-full bg-neutral-900 flex-1 rounded-xl overflow-hidden">
                                             <img
@@ -189,16 +200,15 @@ function App() {
 
                             {/* Description below */}
                             <div className="flex flex-col">
-                                <h2 className="text-3xl font-bold text-primary mb-3">{selectedItem.title}</h2>
-                                <p className="text-base-content text-lg w-1/2">{selectedItem.description}</p>
+                                <h2 className="text-2xl md:text-3xl font-bold text-primary mb-2 md:mb-3">{selectedItem.title}</h2>
+                                <p className="text-base-content text-base md:text-lg w-full lg:w-1/2">{selectedItem.description}</p>
                             </div>
                         </motion.div>
                     </motion.div>
                 )}
             </AnimatePresence>
-
             <hr/>
-            <div className="h-dvh w-full flex flex-col items-center justify-center bg-base-200 relative">
+            <div className="h-dvh w-full flex flex-col items-center justify-center bg-base-200 relative px-4">
                 <motion.p
                     initial={{ opacity: 0, scale: 0 }}
                     whileInView={{
@@ -207,7 +217,7 @@ function App() {
                         transition: { duration: 3, delay: 0 },
                     }}
                     viewport={{ once: true }}
-                    className="text-5xl text-primary font-bold"
+                    className="text-lg md:text-4xl lg:text-5xl text-primary font-bold text-center"
                 >
                     Allow me to become part of your adventure
                 </motion.p>
@@ -219,7 +229,7 @@ function App() {
                         transition: { duration: 3, delay: 3 },
                     }}
                     viewport={{ once: true }}
-                    className="text-5xl text-base-content font-semibold"
+                    className="text-xl md:text-4xl lg:text-5xl text-base-content font-semibold text-center"
                 >
                     Just as you become part of mine
                 </motion.p>
